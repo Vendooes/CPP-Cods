@@ -42,8 +42,7 @@ bool ano_s(subvector *qv, unsigned int new_capacity) {
         qv->mas = nullptr;
         qv->top = 0;
         qv->capacity = 0;
-        return true;
-    }
+        return true;}
 //если новая емкость меньше текущего размера, обрезаем вектор
     if (new_capacity < qv->top) {
         qv->top = new_capacity;}
@@ -58,9 +57,7 @@ bool ano_s(subvector *qv, unsigned int new_capacity) {
     delete[] qv->mas;
     qv->mas = new_mas;
     qv->capacity =new_capacity;
-    
-    return true;
-}
+    return true;}
 //уменьшаем емкость до нужного размера
 void shrink_to_fit(subvector *qv) {
 //если вектор пуст, полностью освобождаем память
@@ -86,8 +83,7 @@ void shrink_to_fit(subvector *qv) {
 }
 //очищает содержимое без освобожения памяти
 void clear(subvector *qv) {
-    qv->top = 0;
-}
+    qv->top = 0;}
 //уничтожает и очищает вектор и память
 void destructor(subvector *qv) {
     delete[] qv->mas;//освобождаем память
@@ -98,8 +94,7 @@ void print_vector(const subvector *qv) {
     for (unsigned int i = 0; i < qv->top; i++) {
         cout << qv->mas[i];
         if (i < qv->top - 1) {
-            cout << ", ";
-        }
+            cout << ", ";}
     }
     cout << "],размер:"<< qv->top << ",емкость:"<< qv->capacity<< endl;}
 int main() {
