@@ -1,6 +1,7 @@
 template<typename T>
 class subforwardlist {
 public:
+// публичные поля в классе с инвариантами?
     struct Node {
         T data;
         Node* next;    
@@ -45,6 +46,7 @@ public:
         if (other.begin ==NULL) {
             begin =NULL;
             return;}
+        // Утечки памяти при begin != nullptr && other.begin == nullptr зашли в чат
         
         begin = new Node(other.begin->data);
         Node* current =begin;
@@ -55,7 +57,10 @@ public:
             current = current->next;
             other_current =other_current->next;}
     }
-    void push_back(const T& data) {
+// Если copy_from используется только после вызова clear(), то не нужно давать её наружу пользователю, 
+// потому что он точно напорется на утечку памяти. Нужно сделать её приватной и радоваться жизни. 
+    
+void push_back(const T& data) {
         Node* new_node =new Node(data);
         
         if (begin ==NULL) {
@@ -154,6 +159,8 @@ public:
         delete node_to_delete;
         return data;
     }
+
+// Во всех методах выше до комментария можно вынести общий паттерн -- поиск указателя на ноду по индексу -- в отдельную функцию, чтобы не копипатсить один и тот же код
 
     unsigned int size() {
         unsigned int count = 0;
