@@ -5,14 +5,20 @@ class subvector {
     unsigned int capacity;
 public:
     subvector() :mas(NULL),top(0),capacity(0) {}
+// Лучше использовать nullprt, поскольку это NULL -- это просто макрос, который дефайнит 0
     
     subvector(unsigned int initial_capacity):mas(NULL),top(0),capacity(0) {
         if (initial_capacity >0) {
             resize(initial_capacity);}
     }
+// Зачем здесь проверка, если аналогичная есть и в resize?
+// А вообще тут можно не использовать resize и просто все сделать внутри списка инициализации
+
     ~subvector() {
         delete[] mas;
     }
+
+// Монжо знагнать всю инициализацию в список инифиализации
     subvector(const subvector& other):mas(NULL),top(0),capacity(0) {
         if (other.capacity>0) {
             mas = new T[other.capacity];
@@ -104,7 +110,7 @@ public:
         top =limit;
         return true;
     }
-
+// Можно переиспользовать код, ведь shrink_to_fit -- это просто resize(top)
     void shrink_to_fit() {
         if (top >=capacity) {
             return;}
